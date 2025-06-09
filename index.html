@@ -1,19 +1,61 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>WinZO Predictor 2.0</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinZO Predictor 2.0</title>
+    <style>
+        body {
+            background-color: #001f3f;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .container {
+            background: #003366;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-  <h1>WinZO Predictor 2.0</h1>
-  <p>Designed by Rajveer</p>
+    <h1>WinZO Predictor 2.0</h1>
+    <p>Designed by Rajveer</p>
+    <div class="container">
+        <input type="text" id="team1" placeholder="Avg Score Team Dhoni">
+        <input type="text" id="players1" placeholder="Players in Team Dhoni"><br>
+        <input type="text" id="team2" placeholder="Avg Score Team Kohli">
+        <input type="text" id="players2" placeholder="Players in Team Kohli"><br>
+        <button onclick="predict()">Predict Winner</button>
+        <h2 id="result"></h2>
+    </div>
+    <script>
+        function predict() {
+            const avg1 = parseFloat(document.getElementById('team1').value);
+            const players1 = parseInt(document.getElementById('players1').value);
+            const avg2 = parseFloat(document.getElementById('team2').value);
+            const players2 = parseInt(document.getElementById('players2').value);
 
-  <input type="number" id="players" placeholder="Number of Players">
-  <input type="number" id="avgScore" placeholder="Average Score">
-  <button onclick="predict()">Predict Winner</button>
+            if (isNaN(avg1) || isNaN(players1) || isNaN(avg2) || isNaN(players2)) {
+                document.getElementById('result').innerText = 'Please enter valid numbers';
+                return;
+            }
 
-  <h2 id="result"></h2>
+            const score1 = avg1 * players1;
+            const score2 = avg2 * players2;
 
-  <script src="script.js"></script>
+            const winner = score1 > score2 ? "🏆 Team Dhoni Wins!" : "🏆 Team Kohli Wins!";
+            document.getElementById('result').innerText = winner;
+        }
+    </script>
 </body>
 </html>
